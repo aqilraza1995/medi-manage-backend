@@ -2,16 +2,22 @@ import mongoose from "mongoose";
 
 const planSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      enum: ["basic", "standard", "premium"],
-      reuired: true
+    name: { type: String, required: true },
+    description: { type: String },
+    maxStores: { type: Number, required: true },
+    features: [{ type: String }],
+    durations: [{ type: Number }],      // [1,2,3,4]
+    pricing: {
+      type: Map,
+      of: new mongoose.Schema(
+        { total: { type: Number, required: true } },
+        { _id: false }
+      )
     },
-    storeLimit: { type: Number, required: true },
-    duration: { type: Number, required: true },
-    price: { type: Number, required: true }
+    isRecommended: { type: Boolean, default: false },
+    isActive: { type: Boolean, default: true }
   },
   { timestamps: true }
-)
+);
 
-export default mongoose.model("plan", planSchema)
+export default mongoose.model("Plan", planSchema);

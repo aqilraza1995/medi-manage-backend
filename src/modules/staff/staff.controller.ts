@@ -1,0 +1,97 @@
+import type { Request, Response } from "express";
+
+import * as StaffDao from "./staff.dao.js"
+import StaffModel from "../../models/staff.model.js";
+import type { getByIdParams } from "../../types/store.js";
+
+export const createStaff = async (req: Request, res: Response) => {
+  try {
+    const { phone, storeId } = req?.body
+    const existing = await StaffModel?.find({ phone })
+    if (existing) {
+      return res?.status(400).json({ success: false, message: "Staff is already exist." })
+    }
+
+    const assignStaff = await StaffModel?.find({ storeId })
+    if (assignStaff) {
+      return res?.status(400).json({ success: false, message: "Staff is already exist on store." })
+    }
+
+    const result = await StaffDao?.createStaff(req?.body)
+    return res?.status(201).json({ success: true, message: "Staff is created", result })
+
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const getStaffs = async (req: Request, res: Response) => {
+  try {
+    const staffs = await StaffDao?.getStaffs()
+    return res?.status(200).json({ success: true, staffs })
+  
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const getStaffById = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+    const staff = await StaffDao?.getStaffById(req?.params?.id)
+    return res?.status(200).json({ success: true, staff })
+ 
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const getStaffByIStore = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+    const staff = await StaffDao?.getStaffByStore(req?.params?.id)
+    return res?.status(200).json({ success: true, staff })
+  
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const getStaffByOwner = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+    const staff = await StaffDao?.getStaffByOwner(req?.params?.id)
+    return res?.status(200).json({ success: true, staff })
+  
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const updateStaff = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+    const { phone, storeId } = req?.body
+    const existing = await StaffModel?.find({ phone })
+    if (existing) {
+      return res?.status(400).json({ success: false, message: "Staff is already exist." })
+    }
+
+    const assignStaff = await StaffModel?.find({ storeId })
+    if (assignStaff) {
+      return res?.status(400).json({ success: false, message: "Staff is already exist on store." })
+    }
+
+    const result = await StaffDao?.updateStaff(req?.params?.id, req?.body)
+    return res?.status(201).json({ success: true, message: "Staff updates successfully", result })
+  
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}
+
+export const deleteStaff = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+    const result = await StaffDao?.deleteStaff(req?.params?.id)
+    return res?.status(201).json({ success: true, message: "Staff delete successfully", result })
+  
+  } catch (error: any) {
+    return res?.status(500).json({ success: false, message: "Internal Server error" })
+  }
+}

@@ -17,10 +17,22 @@ export const createStore = async (req: Request, res: Response) => {
 
 export const getStores = async (req: Request, res: Response) => {
   try {
+   
+    const store = await StoreDao?.getStores()
+    return res?.status(200).json({ success: true, data: store })
+  
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error?.message })
+  }
+}
+
+export const getStoreByOwner = async (req: Request, res: Response) => {
+  try {
     const user: any = (req as any).user;
 
     const store = await StoreDao?.getStoreByOwner(user?.userId)
     return res?.status(200).json({ success: true, data: store })
+  
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
   }
@@ -35,6 +47,7 @@ export const getStoreById = async (req: Request<StoreParams>, res: Response) => 
 
     const store = await StoreDao?.getStoreById(storeId)
     return res?.status(200).json({ success: true, data: store })
+  
   }
   catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
@@ -46,6 +59,7 @@ export const updateStore = async (req: Request<StoreParams>, res: Response) => {
     const { storeId } = req?.params;
     const store = await StoreDao?.updateStore(storeId, req?.body)
     return res?.status(200).json({ success: true, data: store })
+  
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
   }
@@ -56,6 +70,7 @@ export const deleteStore = async (req: Request<StoreParams>, res: Response) => {
     const { storeId } = req?.params;
     await StoreDao?.deleteStore(storeId)
     return res?.status(200).json({ success: true, message: "Store deleted successfully" })
+  
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
   }

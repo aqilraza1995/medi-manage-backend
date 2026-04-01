@@ -4,8 +4,12 @@ export const createStore = async (data: any) => {
   return Store.create(data)
 }
 
+export const getStores = () => {
+  return Store.find().populate("ownerId", "name email")
+}
+
 export const getStoreByOwner = (ownerId: string) => {
-  return Store.find({ ownerId })
+  return Store.find({ ownerId }).populate("ownerId", "name email")
 }
 
 export const getStoreById = (storeId: string) => {

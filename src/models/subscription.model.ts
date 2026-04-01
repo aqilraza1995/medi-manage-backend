@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const subscriptionSchema = new mongoose.Schema(
   {
     userId: {
@@ -13,18 +12,23 @@ const subscriptionSchema = new mongoose.Schema(
       ref: "Plan",
       required: true
     },
-    planName: { type: String },
-    storeLimit: { type: Number },
-    startDate: Date,
-    endDate: Date,
+    duration: { type: Number, required: true },
+    planSnapshot: {
+      name: { type: String , required:true},
+      storeLimit: { type: Number, required:true },
+      price: { type: Number },
+      duration: { type: Number, reuired:true }
+    },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
     isTrial: { type: Boolean, default: false },
     status: {
       type: String,
-      enum: ["active", "expired"],
+      enum: ["active", "expired", "cancelled"],
       default: "active"
     }
   },
   { timestamps: true }
-)
+);
 
-export default mongoose.model("Subscription", subscriptionSchema)
+export default mongoose.model("Subscription", subscriptionSchema);
