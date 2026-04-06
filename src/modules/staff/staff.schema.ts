@@ -6,5 +6,6 @@ export const createUpdateStaffSchema = Joi.object({
   email: Joi.string().email().required(),
   address: Joi.string().required(),
   ownerId: Joi.string().required(),
-  storeId: Joi.string().required()
+  storeId: Joi.string().required(),
+  status:Joi.string().valid("active", "inactive").required().default("active")
 })

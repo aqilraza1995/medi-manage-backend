@@ -12,4 +12,4 @@ router.get("/:id", authenticate, PlanController?.getPlanById)
 router.put("/:id", authenticate, validate(updatePlanSchema), PlanController?.updatePlan)
 router.delete("/:id", authenticate, PlanController?.deletePlan)
 
-export default router;
+export default router; 

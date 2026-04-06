@@ -8,7 +8,7 @@ const router = Router();
 
 router.post("/", authenticate, validate(createStoreSchema), StoreController?.createStore)
 router.get("/", authenticate, StoreController?.getStores)
-router.get("/:ownerId", authenticate, StoreController.getStoreByOwner)
+router.get("/owner/:ownerId", authenticate, StoreController.getStoreByOwner)
 router.get("/:storeId", authenticate, StoreController.getStoreById)
 router.put("/:storeId", authenticate, validate(updateStoreSchema), StoreController.updateStore)
 router.delete("/:storeId", authenticate, StoreController.deleteStore)

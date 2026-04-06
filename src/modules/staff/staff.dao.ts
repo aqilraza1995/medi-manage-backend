@@ -5,19 +5,19 @@ export const createStaff = async (data: any) => {
 }
 
 export const getStaffs = () => {
-  return Staff.find().sort({ createdAt: -1 })
+  return Staff.find().sort({ createdAt: -1 }).populate("storeId", "name address").populate("ownerId", "name role")
 }
 
 export const getStaffByOwner = (ownerId: string) => {
-  return Staff.find({ ownerId }).sort({ createdAt: -1 })
+  return Staff.find({ ownerId }).sort({ createdAt: -1 }).populate("storeId", "name address").populate("ownerId", "name role")
 }
 
 export const getStaffByStore = (storeId: string) => {
-  return Staff.find({ storeId }).sort({ createdAt: -1 })
+  return Staff.find({ storeId }).sort({ createdAt: -1 }).populate("storeId", "name address").populate("ownerId", "name role")
 }
 
 export const getStaffById = (staffId: string) => {
-  return Staff.findById({ staffId })
+  return Staff.findById({_id: staffId }).populate("storeId", "name address").populate("ownerId", "name role")
 }
 
 export const updateStaff = (staffId: string, data: any) => {

@@ -13,7 +13,7 @@ export const getStoreByOwner = (ownerId: string) => {
 }
 
 export const getStoreById = (storeId: string) => {
-  return Store.findById({ storeId })
+  return Store.findById( storeId )
 }
 
 export const updateStore = (storeId: string, data: any) => {
