@@ -22,4 +22,4 @@ export const updateStore = (storeId: string, data: any) => {
 
 export const deleteStore = (storeId: string) => {
   return Store.findByIdAndDelete(storeId)
-}
+} 

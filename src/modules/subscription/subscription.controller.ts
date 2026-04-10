@@ -31,18 +31,14 @@ export const activatePlan = async (req: any, res: Response) => {
 
     // ✅ check duration valid or not
     if (!plan.durations.includes(duration)) {
-      return res.status(400).json({
-        message: "Invalid duration selected"
-      });
+      return res.status(400).json({message: "Invalid duration selected"});
     }
 
     // ✅ get pricing
     const selectedPricing = plan.pricing.get(duration.toString());
 
     if (!selectedPricing) {
-      return res.status(400).json({
-        message: "Pricing not found"
-      });
+      return res.status(400).json({message: "Pricing not found" });
     }
 
     const startDate = new Date();
@@ -71,7 +67,7 @@ export const activatePlan = async (req: any, res: Response) => {
       status: "active"
     });
 
-    res.json({ success: true, data: subscription });
+    res.json({ success: true, message:"Plan activated successfully", data: subscription });
 
   } catch (error: any) {
 

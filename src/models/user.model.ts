@@ -7,10 +7,10 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phone: { type: String, required: true },
     role: { type: String, enum: ["admin", "owner", "staff"], default: "owner" },
-    storeId: { type: mongoose?.Schema?.Types?.ObjectId, ref: "Store" },
+    stores: [{ type: mongoose.Schema.Types.ObjectId, ref: "Store" }],
     createdBy: { type: mongoose?.Schema?.Types?.ObjectId, ref: "User" },
     onboardingCompleted: { type: Boolean, default: false },
-    activeSubscriptionId:{type:mongoose?.Schema?.Types?.ObjectId, ref: "Subscription", default: null},
+    activeSubscription:{type:mongoose?.Schema?.Types?.ObjectId, ref: "Subscription", default: null},
   },
   { timestamps: true }
 )

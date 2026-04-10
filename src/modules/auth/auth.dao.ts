@@ -2,7 +2,7 @@ import userModel from "../../models/user.model.js";
 
 
 export const findUserByEmail = async (email: string) => {
-  return await userModel.findOne({ email }).populate("activeSubscriptionId")
+  return await userModel.findOne({ email })
 }
 
 export const createUser = async (data: any) => {

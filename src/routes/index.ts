@@ -6,6 +6,7 @@ import PlanRoute from "../modules/plan/plan.route.js"
 import CompanyRoute from "../modules/company/company.route.js"
 import CategoryRouter from "../modules/category/category.route.js"
 import StaffRouter from "../modules/staff/staff.route.js"
+import UserRouter from "../modules/user/user.route.js"
 
 const router = Router()
 
@@ -14,6 +15,9 @@ router.use("/auth", authRoutes);
 
 // Store
 router.use("/stores", storeRoutes);
+
+// User
+router.use("/user", UserRouter);
 
 // Subsciption
 router.use("/subscription", subscriptionRoute);

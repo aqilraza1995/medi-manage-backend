@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const storeSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    email: { type: String },
     address: {
       street: { type: String, required: true },
       city: { type: String, required: true },
@@ -15,11 +16,9 @@ const storeSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
-    phone: {
-      type: String
-    },
+    phone: {  type: String },
   },
   { timestamps: true }
 )
 
-export default mongoose.model("Store", storeSchema)
+export default mongoose.model("Store", storeSchema) 

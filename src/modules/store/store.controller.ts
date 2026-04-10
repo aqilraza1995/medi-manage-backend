@@ -8,7 +8,7 @@ export const createStore = async (req: Request, res: Response) => {
     const user: any = (req as any).user;
 
     const store = await StoreDao?.createStore({ ...req?.body, ownerId: user?.userId })
-    return res?.status(201).json({ success: true, data: store })
+    return res?.status(201).json({ success: true, message: "Shope created successfully", data: store })
 
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })

@@ -13,4 +13,4 @@ router.get("/:storeId", authenticate, StoreController.getStoreById)
 router.put("/:storeId", authenticate, validate(updateStoreSchema), StoreController.updateStore)
 router.delete("/:storeId", authenticate, StoreController.deleteStore)
 
-export default router;
+export default router; 
