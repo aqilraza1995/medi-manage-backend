@@ -108,3 +108,14 @@ export const getCurrentPlanInfo = async (req: any, res: Response) => {
     });
   }
 };
+
+export const getSubscriptions = async (req: Request, res: Response) => {
+  try {
+   
+    const subscriptions = await subscriptionDao?.getSubscription()
+    return res?.status(200).json({ success: true, data: subscriptions })
+  
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error?.message })
+  }
+}

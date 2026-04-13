@@ -4,6 +4,10 @@ export const createSubscription = async (data: any) => {
   return subscriptionModel.create(data)
 }
 
+export const getSubscription = () =>{
+  return subscriptionModel?.find().sort({createdAt: -1}).populate("userId", "name email phone" ).populate("planId")
+}
+
 export const getSubscriptions = async (userId: string) => {
   return subscriptionModel?.findOne({ userId, status: "active" })
 }
