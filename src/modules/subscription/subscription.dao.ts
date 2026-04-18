@@ -4,8 +4,8 @@ export const createSubscription = async (data: any) => {
   return subscriptionModel.create(data)
 }
 
-export const getSubscription = () =>{
-  return subscriptionModel?.find().sort({createdAt: -1}).populate("userId", "name email phone" ).populate("planId")
+export const getSubscription = () => {
+  return subscriptionModel?.find().sort({ createdAt: -1 }).populate("userId", "name email phone").populate("planId")
 }
 
 export const getSubscriptions = async (userId: string) => {
@@ -17,9 +17,13 @@ export const updateSubscription = async (id: string, data: any) => {
 }
 
 export const expireOldSubscriptions = async (userId: string) => {
-  return subscriptionModel.updateMany(  { userId, status: "active" }, { status: "expired" } );
+  return subscriptionModel.updateMany({ userId, status: "active" }, { status: "expired" });
 };
 
 export const getSubscriptionHistory = async (userId: string) => {
   return subscriptionModel.find({ userId }).sort({ createdAt: -1 });
 };
+
+export const deleteSubscription = (id: string) => {
+  return subscriptionModel?.findByIdAndDelete(id)
+}

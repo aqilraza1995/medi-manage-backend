@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import * as subscriptionDao from "./subscription.dao.js";
 import Plan from "../../models/plan.model.js";
+import { getByIdParams } from "../../types/store.js";
 
 
 // ✅ Get Plans
@@ -31,14 +32,14 @@ export const activatePlan = async (req: any, res: Response) => {
 
     // ✅ check duration valid or not
     if (!plan.durations.includes(duration)) {
-      return res.status(400).json({message: "Invalid duration selected"});
+      return res.status(400).json({ message: "Invalid duration selected" });
     }
 
     // ✅ get pricing
     const selectedPricing = plan.pricing.get(duration.toString());
 
     if (!selectedPricing) {
-      return res.status(400).json({message: "Pricing not found" });
+      return res.status(400).json({ message: "Pricing not found" });
     }
 
     const startDate = new Date();
@@ -67,7 +68,7 @@ export const activatePlan = async (req: any, res: Response) => {
       status: "active"
     });
 
-    res.json({ success: true, message:"Plan activated successfully", data: subscription });
+    res.json({ success: true, message: "Plan activated successfully", data: subscription });
 
   } catch (error: any) {
 
@@ -111,10 +112,21 @@ export const getCurrentPlanInfo = async (req: any, res: Response) => {
 
 export const getSubscriptions = async (req: Request, res: Response) => {
   try {
-   
+
     const subscriptions = await subscriptionDao?.getSubscription()
     return res?.status(200).json({ success: true, data: subscriptions })
-  
+
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error?.message })
+  }
+}
+
+export const deleteSubscriptions = async (req: Request<getByIdParams>, res: Response) => {
+  try {
+
+    const subscriptions = await subscriptionDao?.deleteSubscription(req?.params?.id)
+    return res?.status(200).json({ success: true, message: "Subscription delete successfully", data: subscriptions })
+
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
   }
