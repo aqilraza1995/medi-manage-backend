@@ -16,7 +16,8 @@ const storeSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
-    phone: {  type: String },
+    phone: { type: String },
+    gst: { type: String }
   },
   { timestamps: true }
 )

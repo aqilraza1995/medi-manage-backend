@@ -5,18 +5,23 @@ const staffSchema = new mongoose.Schema(
     name: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String },
-    address:{type: String},
+    address: {
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      pincode: { type: String, required: true },
+    },
     ownerId: {
       type: mongoose?.Schema?.Types?.ObjectId,
       ref: "User",
       required: true
     },
-    storeId:{
+    shopId: {
       type: mongoose?.Schema?.Types?.ObjectId,
-      ref:"Store",
-      required:true
+      ref: "Store",
+      required: true
     },
-     status: {
+    status: {
       type: String,
       enum: ["active", "inactive"],
       default: "active"

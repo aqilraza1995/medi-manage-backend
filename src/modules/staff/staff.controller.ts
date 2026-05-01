@@ -7,6 +7,9 @@ import type { getByIdParams } from "../../types/store.js";
 export const createStaff = async (req: Request, res: Response) => {
   try {
     const { phone, storeId } = req?.body
+    const user: any = (req as any).user;
+
+    console.log("user===========> ", user)
 
     const existingStaff: any = await StaffModel.findOne({ phone });
 
@@ -24,7 +27,8 @@ export const createStaff = async (req: Request, res: Response) => {
       });
     }
 
-    const result = await StaffDao?.createStaff(req?.body)
+    // const result = await StaffDao?.createStaff(req?.body)
+    const result = await StaffDao?.createStaff({ ...req?.body, ownerId: user?.userId })
     return res?.status(201).json({ success: true, message: "Staff is created", result })
 
   } catch (error: any) {

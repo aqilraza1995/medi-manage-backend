@@ -9,7 +9,8 @@ export const createStoreSchema = Joi.object({
     state: Joi.string().required(),
     pincode: Joi.string().required(),
   }).required(),
-  phone: Joi.string().optional().allow('', null)
+  phone: Joi.string().optional().allow('', null),
+  gst: Joi.string().optional().allow('', null)
 })
 
 
@@ -22,5 +23,6 @@ export const updateStoreSchema = Joi.object({
     state: Joi.string().required(),
     pincode: Joi.string().required(),
   }).required(),
-  phone: Joi.string().optional()
+  phone: Joi.string().optional(),
+  gst: Joi.string().optional()
 }) 

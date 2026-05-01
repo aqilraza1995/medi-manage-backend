@@ -42,7 +42,7 @@ export const getStoreById = async (req: Request<StoreParams>, res: Response) => 
   try {
     const { storeId } = req?.params;
     if (!storeId) {
-      return res?.status(400).json({ success: false, message: "Store ID is required" })
+      return res?.status(400).json({ success: false, message: "Shop ID is required" })
     }
 
     const store = await StoreDao?.getStoreById(storeId)
@@ -58,7 +58,7 @@ export const updateStore = async (req: Request<StoreParams>, res: Response) => {
   try {
     const { storeId } = req?.params;
     const store = await StoreDao?.updateStore(storeId, req?.body)
-    return res?.status(200).json({ success: true, data: store })
+    return res?.status(200).json({ success: true, message:"Shop Updated successfully", data: store })
   
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
@@ -69,7 +69,7 @@ export const deleteStore = async (req: Request<StoreParams>, res: Response) => {
   try {
     const { storeId } = req?.params;
     await StoreDao?.deleteStore(storeId)
-    return res?.status(200).json({ success: true, message: "Store deleted successfully" })
+    return res?.status(200).json({ success: true, message: "Shop deleted successfully" })
   
   } catch (error: any) {
     res.status(500).json({ success: false, message: error?.message })
