@@ -5,7 +5,7 @@ export const createStaff = async (data: any) => {
 }
 
 export const getStaffs = () => {
-  return Staff.find().sort({ createdAt: -1 }).populate("storeId", "name address").populate("ownerId", "name role")
+  return Staff.find().sort({ createdAt: -1 }).populate("shopId", "name address").populate("ownerId", "name role")
 }
 
 export const getStaffByOwner = (ownerId: string) => {
@@ -17,7 +17,7 @@ export const getStaffByStore = (storeId: string) => {
 }
 
 export const getStaffById = (staffId: string) => {
-  return Staff.findById({_id: staffId }).populate("storeId", "name address").populate("ownerId", "name role")
+  return Staff.findById({_id: staffId }).populate("shopId", "name address").populate("ownerId", "name role")
 }
 
 export const updateStaff = (staffId: string, data: any) => {

@@ -10,7 +10,7 @@ const router = Router()
 
 router.post("/", authenticate, validate(createUpdateStaffSchema), StaffController?.createStaff)
 router.get("/", authenticate, StaffController?.getStaffs)
-router.get("/store/:id", authenticate, StaffController?.getStaffByIStore)
+router.get("/shop/:id", authenticate, StaffController?.getStaffByIStore)
 router.get("/owner/:id", authenticate, StaffController?.getStaffByOwner)
 router.get("/:id", authenticate, StaffController?.getStaffById)
 router.put("/:id", authenticate, validate(createUpdateStaffSchema), StaffController?.updateStaff)

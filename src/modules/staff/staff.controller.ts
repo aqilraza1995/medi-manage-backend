@@ -9,8 +9,6 @@ export const createStaff = async (req: Request, res: Response) => {
     const { phone, storeId } = req?.body
     const user: any = (req as any).user;
 
-    console.log("user===========> ", user)
-
     const existingStaff: any = await StaffModel.findOne({ phone });
 
     if (existingStaff) {
@@ -27,7 +25,6 @@ export const createStaff = async (req: Request, res: Response) => {
       });
     }
 
-    // const result = await StaffDao?.createStaff(req?.body)
     const result = await StaffDao?.createStaff({ ...req?.body, ownerId: user?.userId })
     return res?.status(201).json({ success: true, message: "Staff is created", result })
 
@@ -39,7 +36,7 @@ export const createStaff = async (req: Request, res: Response) => {
 export const getStaffs = async (req: Request, res: Response) => {
   try {
     const staffs = await StaffDao?.getStaffs()
-    return res?.status(200).json({ success: true, staffs })
+    return res?.status(200).json({ success: true, data: staffs })
 
   } catch (error: any) {
     return res?.status(500).json({ success: false, message: "Internal Server error" })
@@ -49,7 +46,7 @@ export const getStaffs = async (req: Request, res: Response) => {
 export const getStaffById = async (req: Request<getByIdParams>, res: Response) => {
   try {
     const staff = await StaffDao?.getStaffById(req?.params?.id)
-    return res?.status(200).json({ success: true, staff })
+    return res?.status(200).json({ success: true, data: staff })
 
   } catch (error: any) {
     return res?.status(500).json({ success: false, message: "Internal Server error" })
@@ -79,7 +76,7 @@ export const getStaffByOwner = async (req: Request<getByIdParams>, res: Response
 export const updateStaff = async (req: Request<getByIdParams>, res: Response) => {
   try {
     const { phone, storeId } = req?.body
-  if (phone || storeId) {
+    if (phone || storeId) {
       const existingStaff: any = await StaffModel.findOne({
         phone,
         _id: { $ne: req.params.id }
